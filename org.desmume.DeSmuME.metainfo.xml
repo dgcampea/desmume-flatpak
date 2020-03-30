@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.desmume.DeSmuME</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPLv2</project_license>
+  <name>desmume</name>
+  <summary>DeSmuME is a Nintendo DS emulator</summary>
+  <description>
+    <p>
+      DeSmuME is the most seasoned open source Nintendo DS emulator. It sports tools designed for hackers, speedrunners, youtubers, and casual gamers. Homebrew programs are supported and can even be debugged through GDB.
+    </p>
+    <p>
+      The Windows and OSX versions are both relatively feature rich, and there is a small universe of forks and mods that add even more features for casual gaming.
+    </p>
+    <p>
+      DeSmuME is the origin of RetroArch and OpenEmu Nintendo DS support and is used by several mobile Nintendo DS emulators, with the notable exception of DraStic.
+    </p>
+  </description>
+  <url type="homepage">https://desmume.org/</url>
+  <developer_name>TASVideos</developer_name>
+  <releases>
+    <release version="d787b737e34d9dfc9aba79f16c8ef24eea8d76cd" date="2020-03-06"/>
+  </releases>
+  <content_rating type="oars-1.0" />
+  <update_contact></update_contact>
+</component>

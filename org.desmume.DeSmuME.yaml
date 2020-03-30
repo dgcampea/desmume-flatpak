@@ -1,0 +1,66 @@
+app-id: org.desmume.DeSmuME
+
+runtime: org.gnome.Platform
+runtime-version: '3.36'
+sdk: org.gnome.Sdk
+
+finish-args:
+  - --socket=fallback-x11
+  - --share=ipc
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=all
+  - --filesystem=home:ro
+  - --filesystem=xdg-videos
+  - --filesystem=xdg-music
+
+command: desmume
+rename-desktop-file: desmume.desktop
+cleanup:
+  - /include
+  - '*.la'
+  - '*.a'
+  - /share/man
+  - /bin/pcap-config
+
+modules:
+  - shared-modules/glu/glu-9.json
+  - shared-modules/gtk2/gtk2.json
+  - shared-modules/SDL/SDL-1.2.15.json
+
+  - name: libpcap
+    sources:
+      - type: archive
+        url: https://www.tcpdump.org/release/libpcap-1.9.1.tar.gz
+        sha256: 635237637c5b619bcceba91900666b64d56ecb7be63f298f601ec786ce087094
+
+  - name: x264
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+    config-opts:
+      - --disable-lavf
+    sources:
+      - type: git
+        url: https://code.videolan.org/videolan/x264.git
+        commit: 1771b556ee45207f8711744ccbd5d42a3949b14c
+
+  - name: desmume
+    subdir: 'desmume/src/frontend/posix'
+    post-install:
+      - |
+        desktop-file-install --dir=${FLATPAK_DEST}/share/applications --remove-key Version \
+        --remove-category GNOME --remove-category GTK --set-icon org.desmume.DeSmuME gtk/desmume.desktop
+        install -Dm644 gtk/DeSmuME.xpm "${FLATPAK_DEST}/share/icons/hicolor/32x32/apps/org.desmume.DeSmuME.xpm"
+    sources:
+      - type: git
+        url: https://github.com/TASVideos/desmume.git
+        commit: d787b737e34d9dfc9aba79f16c8ef24eea8d76cd
+    modules:
+      - name: appdata
+        buildsystem: simple
+        build-commands:
+          - install -t "${FLATPAK_DEST}/share/metainfo" -Dm644 org.desmume.DeSmuME.metainfo.xml
+        sources:
+          - type: file
+            path: org.desmume.DeSmuME.metainfo.xml
