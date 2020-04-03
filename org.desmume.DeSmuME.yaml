@@ -1,8 +1,8 @@
 app-id: org.desmume.DeSmuME
 
-runtime: org.gnome.Platform
-runtime-version: '3.36'
-sdk: org.gnome.Sdk
+runtime: org.freedesktop.Platform
+runtime-version: '19.08'
+sdk: org.freedesktop.Sdk
 
 finish-args:
   - --socket=fallback-x11
